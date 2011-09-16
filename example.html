@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>simpleSlider jQuery Plugin</title>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />    
+	
+	<!-- IMPORTANT : must before the javascripts -->
+    <link href="stylesheets/simpleSlider.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/example.css" rel="stylesheet" type="text/css" media="screen" />
+    <!-- /IMPORTANT : must before the javascripts -->
+	
+	<script type="text/javascript" src="javascripts/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.devjunkie.simpleSlider.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {	
+			$('#slider').simpleSlider({
+			    width: 640,
+			    height: 360
+			});
+		});	
+	</script>
+</head>
+<body>
+    <h1>simpleSlider jQuery Plugin</h1>
+    
+    <h2>Example</h2>
+    <div id="slider">
+        <ul>				
+	        <li>
+	            <img src="images/example/borderlands.jpg" alt="Borderlands" />
+	            <div>
+	                <h3 style="margin-top: 0;">Borderlands</h3>
+	                <p>
+	                    Nice to play!
+	                </p>
+	                <a href="http://www.borderlandsthegame.com/" target="_blank">website</a>
+	            </div>
+	        </li>
+	        <li>
+	            <img src="images/example/deusex3.jpg" alt="Deus Ex 3 - Human Revolution" />
+	            <div>
+	                <h3 style="margin-top: 0;">Deus Ex 3 - Human Revolution</h3>
+	                <p>
+	                    I don't know how it is.
+	                </p>
+	                <a href="http://deusex.com/" target="_blank">website</a>
+	            </div>
+	        </li>
+	        <li>
+	            <img src="images/example/portal2.jpg" alt="Portal 2" />
+	            <div>
+	                <h3 style="margin-top: 0;">Portal 2</h3>
+	                <p>
+	                    I want to see more!
+	                </p>
+	                <a href="http://www.thinkwithportals.com/" target="_blank">website</a>
+	            </div>
+	        </li>	
+	        <li>
+	            <img src="images/example/teamfortress2.jpg" alt="Team Fortres 2" />
+	            <div>
+	                <h3 style="margin-top: 0;">Team Fortress 2</h3>
+	                <p>
+	                    Realy good game!
+	                </p>
+	                <a href="http://www.teamfortress.com/" target="_blank">website</a>
+	            </div>
+	        </li>	
+        </ul>
+    </div>
+		
+    <h3>Usage</h3>
+	
+    <pre>
+$(document).ready(function () {	
+    $("#slider").simpleSlider({
+        width: 640,
+        height: 360
+    });
+});	
+    </pre>
+</body>
+</html>
