@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.0 - (2011/09/16)
+ * @version: 1.0.0 - (2011/09/16)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
