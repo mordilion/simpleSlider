@@ -9,7 +9,6 @@
  *
  * Built for jQuery library
  * http://jquery.com
- *
  */
  
 
@@ -18,10 +17,7 @@
     /** 
      * static constructs
      ********************************************************************************/
-    $.devjunkie = $.devjunkie || {version: '1.0.0'};
-     
-     
-    $.devjunkie.simpleSlider = {
+    $.simpleSlider = {
         addEffect: function (name, fn) {
             effects[name] = fn;
         },
@@ -45,7 +41,7 @@
             numeric: false,             // show the buttons as numeric
             nextText: 'next',           // text showing on the next button
             title: true,                // show the image title
-            previousText: 'prev',       // text showing on the previous button
+            previousText: 'prev'        // text showing on the previous button
         }
     };
     /********************************************************************************/
@@ -59,7 +55,7 @@
      * default effects
      ********************************************************************************/
     // random effect
-    $.devjunkie.simpleSlider.addEffect('random',
+    $.simpleSlider.addEffect('random',
         function (current, next, opts) {
             var name = opts.last;
             var effect = null;
@@ -84,7 +80,7 @@
     );
      
     // the simple horizontal slide effect
-    $.devjunkie.simpleSlider.addEffect('horizontal',
+    $.simpleSlider.addEffect('horizontal',
         function (current, next, opts) {
             var options = this.getOptions();
         
@@ -108,7 +104,7 @@
     );
     
     // the simple vertical slide effect
-    $.devjunkie.simpleSlider.addEffect('vertical',
+    $.simpleSlider.addEffect('vertical',
         function (current, next, opts) {
             var options = this.getOptions();
         
@@ -132,7 +128,7 @@
     );
     
     // the simple fade effect
-    $.devjunkie.simpleSlider.addEffect('fade',
+    $.simpleSlider.addEffect('fade',
         function (current, next, opts) {
             var options = this.getOptions();
             
@@ -151,7 +147,7 @@
     );
     
     // an other horizontal slide effect
-    $.devjunkie.simpleSlider.addEffect('slideHorizontal',
+    $.simpleSlider.addEffect('slideHorizontal',
         function (current, next, opts) {
             var options = this.getOptions();
             
@@ -173,7 +169,7 @@
     );
     
     // an other vertucal slide effect
-    $.devjunkie.simpleSlider.addEffect('slideVertical',
+    $.simpleSlider.addEffect('slideVertical',
         function (current, next, opts) {
             var options = this.getOptions();
             
@@ -563,14 +559,14 @@
      ********************************************************************************/
     $.fn.simpleSlider = function (options) {
         var element = this;
-        var dataName = 'devjunkie.simpleSlider';
+        var dataName = 'simpleSlider';
         
         // if already constructed the return it
         if (element.data(dataName)) {
             return element.data(dataName);
         }
         
-        options = $.extend(true, {}, $.devjunkie.simpleSlider.defaults, options);
+        options = $.extend(true, {}, $.simpleSlider.defaults, options);
         
         this.each(function () {
             element = new SimpleSlider(this, options);
