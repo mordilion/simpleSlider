@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.0.0 - (2011/09/16)
+ * @version: 1.1.0 - (2011/09/18)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -18,6 +18,8 @@
      * static constructs
      ********************************************************************************/
     $.simpleSlider = {
+        version: '1.1.0',
+    
         addEffect: function (name, fn) {
             effects[name] = fn;
         },
@@ -29,7 +31,7 @@
 
             auto: true,                 // slide automaticly
             delay: 3000,                // delay between images in ms
-            effect: 'random',           // "random" => random effect or "vertical", "horizontal", "slide-vertical", "slide-horizontal"
+            effect: 'random',           // "random" => random effect or "vertical", "horizontal", ...
             index: 0,                   // index of the first image to show
             keepSlide: true,            // keep automatic sliding
             speed: 1200,                // animation speed
@@ -143,50 +145,6 @@
             }).show();
             
             $(current).fadeOut(options.speed, this.complete);
-        }
-    );
-    
-    // an other horizontal slide effect
-    $.simpleSlider.addEffect('slideHorizontal',
-        function (current, next, opts) {
-            var options = this.getOptions();
-            
-            $(next).css({
-                'top': 0,
-                'left': parseInt(opts.direction + options.width) * -1,
-                'z-index': options.zIndex + 100
-            }).show().animate({
-                'left': 0
-            }, {
-                duration: options.speed,
-                complete: this.complete
-            });
-            
-            $(current).css({
-                'z-index': options.zIndex + 90
-            });
-        }
-    );
-    
-    // an other vertucal slide effect
-    $.simpleSlider.addEffect('slideVertical',
-        function (current, next, opts) {
-            var options = this.getOptions();
-            
-            $(next).css({
-                'top': parseInt(opts.direction + options.height) * -1,
-                'left': 0,
-                'z-index': options.zIndex + 100
-            }).show().animate({
-                'top': 0
-            }, {
-                duration: options.speed,
-                complete: this.complete
-            });
-            
-            $(current).css({
-                'z-index': options.zIndex + 90
-            });
         }
     );
     /********************************************************************************/
