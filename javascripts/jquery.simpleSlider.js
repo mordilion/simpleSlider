@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.1.0 - (2011/09/18)
+ * @version: 1.1.0 - (2011/09/19)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -35,6 +35,8 @@
             index: 0,                   // index of the first image to show
             keepSlide: true,            // keep automatic sliding
             speed: 1200,                // animation speed
+            squaresPerHeight: 5,        // squares per height
+            squaresPerWidth: 7,         // squares per width
             titleOpacity: 0.7,          // opacity of the title
             titleSpeed: 500,            // speed of title fade in ms
             
@@ -65,7 +67,7 @@
             do {
                 for (key in effects) {
                     if (key != 'random') {
-                        if (parseInt(Math.random() * 2) == 1) {
+                        if (parseInt(Math.random() * 10) == 1) {
                             name = key;
                             break;
                         }
@@ -197,6 +199,8 @@
             // setup all list elements
             $('li', list).css({
                 'position': 'absolute',
+                'width': options.width,
+                'height': options.height,
                 'z-index': options.zIndex + 100
             }).each(function () {
                 $('div:first', this).hide();
@@ -385,6 +389,8 @@
          * reset all list elements
          */
         function resetListElements(nextIndex) {
+            $('img:first', getElement(index)).show();
+            
             for (var i = 0; i < count; i++) {
                 if (i == index || i == nextIndex) {
                     continue;
@@ -402,7 +408,7 @@
             var effect      = null;
             var opts        = {};
             var nextIndex   = 0;
-            var direction   = '+';
+            var direction   = '-';
             var current     = null;
             var next        = null;
             
