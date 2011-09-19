@@ -400,6 +400,7 @@
          */
         function slide(to, click) {
             var effect      = null;
+            var name        = '';
             var opts        = {};
             var nextIndex   = 0;
             var direction   = '+';
@@ -439,12 +440,20 @@
                 index = nextIndex;
                 $.extend(opts, {direction: direction});
                 
-                if (options.effect == 'random') {
+                if ($.isArray(options.effect)) {
+                    do {
+                        name = options.effect[Math.floor(Math.random() * options.effect.length)];
+                    } while(name == last);
+                    last = name;
+                } else if (options.effect == 'random') {
                     direction = Math.floor(Math.random() * 2) == 0 ? '+' : '-';
                     $.extend(opts, {last: last, direction: direction});
+                    name = 'random';
+                } else {
+                    name = options.effect;
                 }
                 
-                var effect = effects[options.effect];
+                var effect = effects[name];
                 
                 if (effect) {
                     resetListElements();
