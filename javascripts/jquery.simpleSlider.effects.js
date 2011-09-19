@@ -78,12 +78,9 @@
     // horizontal blind effect
     $.simpleSlider.addEffect('blindHorizontal',
         function (current, next, opts) {
-            var options     = this.getOptions();
+            var options     = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             var self        = this;
             var margin      = parseInt($(current).css('margin-left'));
-            
-            opts.squaresPerHeight = 1;
-            $.extend(options, opts);
             
             $(next).css({
                 'top': 0,
@@ -112,12 +109,9 @@
     // vertical blind effect
     $.simpleSlider.addEffect('blindVertical',
         function (current, next, opts) {
-            var options     = this.getOptions();
+            var options     = $.extend({}, this.getOptions(), opts, {squaresPerWidth: 1});
             var self        = this;
             var margin      = parseInt($(current).css('margin-top'));
-            
-            opts.squaresPerWidth = 1;
-            $.extend(options, opts);
             
             $(next).css({
                 'top': 0,

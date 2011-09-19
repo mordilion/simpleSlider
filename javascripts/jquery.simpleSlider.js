@@ -458,7 +458,7 @@
                 } else {
                     name = options.effect;
                 }
-                
+
                 var effect = effects[name];
                 
                 if (effect) {
