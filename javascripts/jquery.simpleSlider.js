@@ -447,9 +447,13 @@
                 $.extend(opts, {direction: direction});
                 
                 if ($.isArray(options.effect)) {
-                    do {
-                        name = options.effect[Math.floor(Math.random() * options.effect.length)];
-                    } while(name == last);
+                    if (options.effect.length > 1) {
+                        do {
+                            name = options.effect[Math.floor(Math.random() * options.effect.length)];
+                        } while(name == last);
+                    } else {
+                        name = options.effect[0];
+                    }
                     last = name;
                 } else if (options.effect == 'random') {
                     direction = Math.floor(Math.random() * 2) == 0 ? '+' : '-';
