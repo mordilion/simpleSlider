@@ -142,12 +142,9 @@
         function (current, next, opts) {
             var options     = $.extend({}, this.getOptions(), opts);
             var self        = this;
-            var dowhile     = true;
-            var wait        = 0;
-            var m           = options.squaresPerWidth;
-            var n           = options.squaresPerHeight;
+            var spw         = options.squaresPerWidth;
+            var sph         = options.squaresPerHeight;
             var callback    = null;
-            var from = to = to2 = 1;
             
             $(next).css({
                 'top': 0,
@@ -159,23 +156,22 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
-			while(dowhile){
-			    var col = 0;
-				for (var row = from; row <= to; row++) {
-				    col = parseInt(to2 - row + 1);
-				    if (row == n && col == m) {
-				        callback = this.complete;
-				    }
-					$('div:[id="simpleSlider-square-' + row + '-' + col + '"]', current).delay(wait * (options.speed / (m + n))).fadeOut(250, callback);
-				}
-				
-				to2++;
-				if (to < n && to2 < m && n < m) to++;
-				if (to < n && n >= m) to++;
-				if (to2 > m) from++;
-				if (from > to) dowhile= false;
-				wait++;
-			}	
+            var count = $('div:[id*="simpleSlider-square"]', current).length;
+            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
+                var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
+                var wait = (row + col) - 1;
+                if (opts.direction == '+') {
+                    wait = (spw + sph) - wait;
+                }
+                wait *= options.speed / (spw + sph);
+                
+                if (index == (count - 1)) {
+                    callback = self.complete;
+                }
+
+                $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+            });
         }
     );
     
