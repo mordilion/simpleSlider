@@ -20,8 +20,8 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
 * Rain
 
 ## Usage
-	<script type="text/javascript" src="javascripts/jquery.simpleSlider.js" />          # needed to use
-	<script type="text/javascript" src="javascripts/jquery.simpleSlider.effects.js" />  # if you want more effects
+    <script type="text/javascript" src="javascripts/jquery.simpleSlider.js" />          # needed to use
+    <script type="text/javascript" src="javascripts/jquery.simpleSlider.effects.js" />  # if you want more effects
 
     <script type="text/javascript">
         $(document).ready(function () {	
