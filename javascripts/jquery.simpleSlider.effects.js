@@ -75,6 +75,50 @@
         }
     );
     
+    // horizontal fade & slide effect
+    $.simpleSlider.addEffect('fadeslideHorizontal',
+        function (current, next, opts) {
+            var options = this.getOptions();
+            
+            $(next).css({
+                'top': 0,
+                'left': parseInt(opts.direction + options.width) * -1,
+                'opacity': 0,
+                'z-index': options.zIndex + 100
+            }).show().animate({
+                'left': 0,
+                'opacity': 1
+            }, {
+                duration: options.speed,
+                complete: this.complete
+            });
+            
+            $(current).css('z-index', options.zIndex + 90);
+        }
+    );
+    
+    // vertical fade & slide effect
+    $.simpleSlider.addEffect('fadeslideVertical',
+        function (current, next, opts) {
+            var options = this.getOptions();
+            
+            $(next).css({
+                'top': parseInt(opts.direction + options.height) * -1,
+                'left': 0,
+                'opacity': 0,
+                'z-index': options.zIndex + 100
+            }).show().animate({
+                'top': 0,
+                'opacity': 1
+            }, {
+                duration: options.speed,
+                complete: this.complete
+            });
+            
+            $(current).css('z-index', options.zIndex + 90);
+        }
+    );
+    
     // horizontal blind effect
     $.simpleSlider.addEffect('blindHorizontal',
         function (current, next, opts) {
@@ -164,7 +208,7 @@
                 if (opts.direction == '+') {
                     wait = (spw + sph) - wait;
                 }
-                wait *= options.speed / (spw + sph);
+                wait *= options.speed / (spw + sph - 1);
                 
                 if (index == (count - 1)) {
                     callback = self.complete;
@@ -172,50 +216,6 @@
 
                 $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
             });
-        }
-    );
-
-    // horizontal fade & slide effect
-    $.simpleSlider.addEffect('fadeslideHorizontal',
-        function (current, next, opts) {
-            var options = this.getOptions();
-            
-            $(next).css({
-                'top': 0,
-                'left': parseInt(opts.direction + options.width) * -1,
-                'opacity': 0,
-                'z-index': options.zIndex + 100
-            }).show().animate({
-                'left': 0,
-                'opacity': 1
-            }, {
-                duration: options.speed,
-                complete: this.complete
-            });
-            
-            $(current).css('z-index', options.zIndex + 90);
-        }
-    );
-    
-    // vertical fade & slide effect
-    $.simpleSlider.addEffect('fadeslideVertical',
-        function (current, next, opts) {
-            var options = this.getOptions();
-            
-            $(next).css({
-                'top': parseInt(opts.direction + options.height) * -1,
-                'left': 0,
-                'opacity': 0,
-                'z-index': options.zIndex + 100
-            }).show().animate({
-                'top': 0,
-                'opacity': 1
-            }, {
-                duration: options.speed,
-                complete: this.complete
-            });
-            
-            $(current).css('z-index', options.zIndex + 90);
         }
     );
     
