@@ -18,6 +18,8 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
 * Fade Slide (Horizontal/Vertical)
 * Fade
 * Rain
+* RainGrow
+* Slice Up/Down
 
 ## Usage
     <script type="text/javascript" src="javascripts/jquery.simpleSlider.js" />          # needed to use
