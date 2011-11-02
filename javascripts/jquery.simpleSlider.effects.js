@@ -289,7 +289,6 @@
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
-                console.log(backgroundPosition);
                 wait *= options.speed / (spw + sph - 1);
                 
                 if (index == (count - 1)) {
