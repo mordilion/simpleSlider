@@ -289,7 +289,6 @@
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
-                console.log(backgroundPosition);
                 wait *= options.speed / (spw + sph - 1);
                 
                 if (index == (count - 1)) {
@@ -319,6 +318,49 @@
 
             });
         }
+    );
+    
+    // slice up effect
+    $.simpleSlider.addEffect('sliceUp',
+        function (current, next, opts) {
+            var options     = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
+            var self        = this;
+            
+            $(next).css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            $(current).css('z-index', options.zIndex + 100);
+            
+            var dimension = $.simpleSlider.buildSquareMatrix(next, options);
+            $('div:[id*="simpleSlider-square"]', next).css('top', 0);
+            
+            $('img:first', next).hide();
+            $(next).css('z-index', options.zIndex + 101);
+            
+            $('div:[id*="simpleSlider-square"]', next).each(function () {
+                var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
+                var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
+                var wait = (row + col) - 1;
+                
+                if (opts.direction == '+') {
+                    wait = (spw + sph) - wait;
+                }
+                wait *= options.speed / (spw + sph - 1);
+            });
+            
+            $('div:[id*="simpleSlider-square"]', current).show().animate({
+                'width': 0,
+                'margin-left': margin
+            }, {
+                duration: options.speed,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            });
+        } 
     );
     
 })(jQuery);
