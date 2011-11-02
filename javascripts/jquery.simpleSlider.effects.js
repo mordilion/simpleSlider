@@ -64,6 +64,53 @@
         return position;
     };
     
+    // main method for slice effects
+    $.simpleSlider.sliceEffect = function (current, next, options, instance, init, ani) {
+        var self        = instance;
+        var spw         = options.squaresPerWidth;
+        var sph         = options.squaresPerHeight;
+        var callback    = null;
+        
+        $('img:first', next).hide();
+        $(next).css({
+            'top': 0,
+            'left': 0,
+            'z-index': options.zIndex + 100
+        }).show();
+        $(current).css('z-index', options.zIndex + 90);
+        
+        var dimension = $.simpleSlider.buildSquareMatrix(next, options);
+        $('div:[id*="simpleSlider-square"]', next).css(init);
+        
+        var count = $('div:[id*="simpleSlider-square"]', next).length;
+        $('div:[id*="simpleSlider-square"]', next).each(function (index) {
+            var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
+            var wait = col - 1;
+            
+            if (options.direction == '+') {
+                wait = (spw + sph) - wait;
+                count = 1;
+            }
+            wait *= options.speed / (options.squaresPerWidth * 5);
+            
+            if (index == (count - 1)) {
+                callback = function () {
+                    $('div:[id*="simpleSlider-square-"]', next).remove();
+                    $('img:first', current).hide();
+                    $('img:first', next).show();
+                    self.complete();
+                }
+            } else {
+                callback = null;
+            }
+            
+            $(this).delay(wait).animate(ani, {
+                duration: options.speed / (options.squaresPerWidth / 2),
+                complete: callback
+            });
+        });
+    };
+    
     // overlay horizontal slide effect
     $.simpleSlider.addEffect('overlayHorizontal',
         function (current, next, opts) {
@@ -323,52 +370,18 @@
     // slice up effect
     $.simpleSlider.addEffect('sliceUp',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
-            var self        = this;
-            var spw         = options.squaresPerWidth;
-            var sph         = options.squaresPerHeight;
-            var callback    = null;
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             
-            $('img:first', next).hide();
-            $(next).css({
-                'top': 0,
-                'left': 0,
-                'z-index': options.zIndex + 100
-            }).show();
-            $(current).css('z-index', options.zIndex + 90);
+            $.simpleSlider.sliceEffect(current, next, options, this, {'top': options.height}, {'top': 0});
+        } 
+    );
+    
+    // slice down effect
+    $.simpleSlider.addEffect('sliceDown',
+        function (current, next, opts) {
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             
-            var dimension = $.simpleSlider.buildSquareMatrix(next, options);
-            $('div:[id*="simpleSlider-square"]', next).css('top', options.height);
-            
-            var count = $('div:[id*="simpleSlider-square"]', next).length;
-            $('div:[id*="simpleSlider-square"]', next).each(function (index) {
-                var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
-                var wait = col - 1;
-                
-                if (opts.direction == '+') {
-                    wait = (spw + sph) - wait;
-                    count = 1;
-                }
-                wait *= options.speed / (options.squaresPerWidth * 5);
-                
-                if (index == (count - 1)) {
-                    callback = function () {
-                        $('div:[id*="simpleSlider-square-"]', next).remove();
-                        $('img:first', current).hide();
-                        $('img:first', next).show();
-                        self.complete();
-                    }
-                } else {
-                    callback = null;
-                }
-                
-                $(this).delay(wait).animate({
-                    'top': 0
-                }, {
-                    duration: options.speed / options.squaresPerWidth,
-                    complete: callback
-                });
-            });
+            $.simpleSlider.sliceEffect(current, next, options, this, {'top': options.height * -1}, {'top': 0});
         } 
     );
     
