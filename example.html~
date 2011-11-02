@@ -16,7 +16,7 @@
 		$(document).ready(function () {	
 			$('#slider').simpleSlider({
 			    width: 640,
-			    height: 360
+			    height: 360q
 			});
 		});	
 	</script>
