@@ -68,7 +68,6 @@
             
             do {
                 var rand = Math.floor(Math.random() * effectNames.length);
-                console.log(rand);
                 name = effectNames[rand];
             } while(opts.last == name);
             

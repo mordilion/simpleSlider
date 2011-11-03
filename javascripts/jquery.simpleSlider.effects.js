@@ -91,7 +91,7 @@
                 wait = (spw + sph) - wait;
                 count = 1;
             }
-            wait *= options.speed / (options.squaresPerWidth * 5);
+            wait *= (options.speed / options.squaresPerWidth);
             
             if (index == (count - 1)) {
                 callback = function () {
@@ -105,7 +105,7 @@
             }
             
             $(this).delay(wait).animate(ani, {
-                duration: options.speed / (options.squaresPerWidth / 2),
+                duration: options.speed / 2,
                 complete: callback
             });
         });
