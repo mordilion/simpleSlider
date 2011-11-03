@@ -22,6 +22,7 @@
     
         addEffect: function (name, fn) {
             effects[name] = fn;
+            effectNames.push(name);
         },
         
         defaults: {
@@ -53,6 +54,7 @@
     
     var instances   = [];
     var effects     = [];
+    var effectNames = [];
     
     
     /**
@@ -65,14 +67,9 @@
             var effect = null;
             
             do {
-                for (key in effects) {
-                    if (key != 'random') {
-                        if (parseInt(Math.random() * 10) == 1) {
-                            name = key;
-                            break;
-                        }
-                    }
-                }
+                var rand = Math.floor(Math.random() * effectNames.length);
+                console.log(rand);
+                name = effectNames[rand];
             } while(opts.last == name);
             
             effect = effects[name];
