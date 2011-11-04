@@ -367,6 +367,45 @@
         }
     );
     
+    // rain random effect
+    $.simpleSlider.addEffect('rainRandom',
+        function (current, next, opts) {
+            var options     = $.extend({}, this.getOptions(), opts);
+            var self        = this;
+            var spw         = options.squaresPerWidth;
+            var sph         = options.squaresPerHeight;
+            var callback    = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            }
+
+            $(next).css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            $(current).css('z-index', options.zIndex + 100);
+            
+            var dimension = $.simpleSlider.buildSquareMatrix(current, options);
+            $('img:first', current).hide();
+            
+            var lastWait = 0;
+            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
+                var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
+                var wait = 0;
+                do {
+                    var wait = Math.floor(Math.random() * (spw * sph)) * (options.speed / (spw * sph));
+                } while(wait == lastWait);
+                lastWait = wait;
+
+                $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+            });
+        }
+    );
+    
     // slice up effect
     $.simpleSlider.addEffect('sliceUp',
         function (current, next, opts) {
