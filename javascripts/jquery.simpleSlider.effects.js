@@ -69,8 +69,9 @@
         var self        = instance;
         var spw         = options.squaresPerWidth;
         var sph         = options.squaresPerHeight;
-        var callback = function () {
-            if ($('div:[id*="simpleSlider-square-"]:visible', next).length == 0) {
+        var callback    = function () {
+            console.log($('div:[id*="simpleSlider-square-"]:animated', next).length);
+            if ($('div:[id*="simpleSlider-square-"]:animated', next).length == 1) {
                 $('div:[id*="simpleSlider-square-"]', next).remove();
                 $('img:first', current).hide();
                 $('img:first', next).show();
@@ -96,7 +97,7 @@
             if (options.direction == '+') {
                 wait = (spw + sph) - wait;
             }
-            wait *= (options.speed / options.squaresPerWidth);
+            wait *= (options.speed / spw);
             
             $(this).delay(wait).animate(ani, {
                 duration: options.speed / 2,
