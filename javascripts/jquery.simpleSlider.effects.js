@@ -264,7 +264,12 @@
             var self        = this;
             var spw         = options.squaresPerWidth;
             var sph         = options.squaresPerHeight;
-            var callback    = null;
+            var callback    = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            }
             
             $(next).css({
                 'top': 0,
@@ -276,25 +281,14 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
-            var count = $('div:[id*="simpleSlider-square"]', current).length;
             $('div:[id*="simpleSlider-square"]', current).each(function (index) {
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = (row + col) - 1;
                 if (opts.direction == '+') {
                     wait = (spw + sph) - wait;
-                    count = 1;
                 }
                 wait *= options.speed / (spw + sph - 1);
-
-                if (index == (count - 1)) {
-                    callback = function () {
-                        $('div:[id*="simpleSlider-square-"]', current).remove();
-                        self.complete();
-                    }
-                } else {
-                    callback = null;
-                }
 
                 $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
             });
