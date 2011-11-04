@@ -69,7 +69,14 @@
         var self        = instance;
         var spw         = options.squaresPerWidth;
         var sph         = options.squaresPerHeight;
-        var callback    = null;
+        var callback = function () {
+            if ($('div:[id*="simpleSlider-square-"]:visible', next).length == 0) {
+                $('div:[id*="simpleSlider-square-"]', next).remove();
+                $('img:first', current).hide();
+                $('img:first', next).show();
+                self.complete();
+            }
+        }
         
         $('img:first', next).hide();
         $(next).css({
@@ -81,28 +88,15 @@
         
         var dimension = $.simpleSlider.buildSquareMatrix(next, options);
         $('div:[id*="simpleSlider-square"]', next).css(init);
-        
-        var count = $('div:[id*="simpleSlider-square"]', next).length;
+
         $('div:[id*="simpleSlider-square"]', next).each(function (index) {
             var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
             var wait = col - 1;
             
             if (options.direction == '+') {
                 wait = (spw + sph) - wait;
-                count = 1;
             }
             wait *= (options.speed / options.squaresPerWidth);
-            
-            if (index == (count - 1)) {
-                callback = function () {
-                    $('div:[id*="simpleSlider-square-"]', next).remove();
-                    $('img:first', current).hide();
-                    $('img:first', next).show();
-                    self.complete();
-                }
-            } else {
-                callback = null;
-            }
             
             $(this).delay(wait).animate(ani, {
                 duration: options.speed / 2,
