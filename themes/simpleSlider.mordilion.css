@@ -1,4 +1,12 @@
-/* simpleSlider - theme - mordilion */
+/**
+ * simpleSlider - theme - mordilion
+ *
+ * @version: 0.1 - (2011/11/06)
+ * @author Henning Huncke
+ *
+ * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
+ */
+
 /**************************************************************************************/
 .simpleSlider.theme-mordilion {
     background: url('mordilion/slider.png') no-repeat left top transparent;

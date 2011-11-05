@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.1.3 - (2011/11/05)
+ * @version: 1.2.14 - (2011/11/05)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
