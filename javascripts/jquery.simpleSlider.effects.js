@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.1.2 - (2011/11/02)
+ * @version: 1.1.3 - (2011/11/05)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -70,7 +70,6 @@
         var spw         = options.squaresPerWidth;
         var sph         = options.squaresPerHeight;
         var callback    = function () {
-            console.log($('div:[id*="simpleSlider-square-"]:animated', next).length);
             if ($('div:[id*="simpleSlider-square-"]:animated', next).length == 1) {
                 $('div:[id*="simpleSlider-square-"]', next).remove();
                 $('img:first', current).hide();
