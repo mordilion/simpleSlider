@@ -1,0 +1,30 @@
+/* simpleSlider - theme - mordilion */
+/**************************************************************************************/
+.simpleSlider.theme-mordilion {
+    background: url('mordilion/slider.png') no-repeat left top transparent;
+    height: 390px;
+    margin: 0 auto;
+    padding: 28px;
+    width: 640px;
+}
+
+.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons {
+    left: 50%;
+    margin-left: -32px; /* 3 => -24px; 4 = -32px; etc. */
+    top: 388px;
+}
+
+.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button {
+    background: url('mordilion/navigation-button.png') no-repeat left top transparent;
+    border: none;
+    border-radius: none;
+    height: 10px;
+    padding: 0;
+    width: 10px;    
+}
+
+.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button.current {
+    background: url('mordilion/navigation-button-current.png') no-repeat left top transparent;
+}
+/**************************************************************************************/
+
