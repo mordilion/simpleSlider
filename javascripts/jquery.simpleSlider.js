@@ -69,7 +69,7 @@
             do {
                 var rand = Math.floor(Math.random() * effectNames.length);
                 name = effectNames[rand];
-            } while(opts.last == name);
+            } while(opts.last == name || name == 'random');
             
             effect = effects[name];
             if (effect) {
@@ -463,7 +463,10 @@
                 
                 if (effect) {
                     resetListElements();
+                    console.time(name);
                     var result = effect.call(self, current, next, opts);
+                    console.timeEnd(name);
+                    console.log(result);
                     if (options.effect == 'random') {
                         last = result;
                     }
