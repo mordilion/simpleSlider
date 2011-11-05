@@ -171,13 +171,25 @@
          * initialization needed elements
          */
         function init() {
+            // get the theme-class
+            var classes = $(element).attr('class').split(/ /);
+            var theme = null;
+            
+            $(classes).each(function (index, value) {
+                if (value.substring(0, 5) == 'theme') {
+                    theme = value;
+                    $(element).removeClass(theme);
+                    return true;
+                }
+            });
+        
             // setup the panel
             $(element).css({
                 'height': options.height, 
                 'width': options.width, 
                 'overflow': 'hidden', 
                 'position': 'relative'
-            }).wrap('<div class="simpleSlider" id="simpleSlider-' + element.id + '" />');
+            }).wrap('<div class="simpleSlider' + (theme != null ? ' ' + theme : '') + '" id="simpleSlider-' + element.id + '" />');
             wrapper = $('#simpleSlider-' + element.id);
                 
             // setup the title
@@ -463,10 +475,7 @@
                 
                 if (effect) {
                     resetListElements();
-                    console.time(name);
                     var result = effect.call(self, current, next, opts);
-                    console.timeEnd(name);
-                    console.log(result);
                     if (options.effect == 'random') {
                         last = result;
                     }
