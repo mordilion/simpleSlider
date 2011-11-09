@@ -478,6 +478,7 @@
                 
                 if (effect) {
                     resetListElements();
+                    resetNavigation();
                     var result = effect.call(self, current, next, opts);
                     if (options.effect == 'random') {
                         last = result;
@@ -512,7 +513,6 @@
              * public method to finishing the slide (must be called after the slide is finished)
              */
             complete: function () {
-                resetNavigation();
                 resetTitle(getElement(index));
                 resetTimeout(clicked);
                 slideable = true;
