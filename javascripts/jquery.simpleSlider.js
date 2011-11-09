@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.2.15 - (2011/11/08)
+ * @version: 1.2.15 - (2011/11/09)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -172,16 +172,19 @@
          */
         function init() {
             // get the theme-class
-            var classes = $(element).attr('class').split(/ /);
+            var classes = $(element).attr('class');
+            classes = classes != undefined ? classes.split(/ /) : null; 
             var theme = null;
             
-            $(classes).each(function (index, value) {
-                if (value.substring(0, 5) == 'theme') {
-                    theme = value;
-                    $(element).removeClass(theme);
-                    return true;
-                }
-            });
+            if (classes != null) {
+                $(classes).each(function (index, value) {
+                    if (value.substring(0, 5) == 'theme') {
+                        theme = value;
+                        $(element).removeClass(theme);
+                        return true;
+                    }
+                });
+            }
         
             // setup the panel
             $(element).css({
