@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.2.15 - (2011/11/09)
+ * @version: 1.3.15 - (2011/11/10)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -84,7 +84,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
         
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': parseInt(opts.direction + options.width) * -1,
                 'z-index': options.zIndex + 100
@@ -92,7 +92,7 @@
                 'left': opts.direction + '=' + options.width
             }, options.speed);
             
-            $(current).css({
+            current.css({
                 'z-index': options.zIndex + 90
             }).animate({
                 'left': opts.direction + '=' + options.width
@@ -108,7 +108,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
         
-            $(next).css({
+            next.css({
                 'top': parseInt(opts.direction + options.height) * -1,
                 'left': 0,
                 'z-index': options.zIndex + 100
@@ -116,7 +116,7 @@
                 'top': opts.direction + '=' + options.height
             }, options.speed);
             
-            $(current).css({
+            current.css({
                 'z-index': options.zIndex + 90
             }).animate({
                 'top': opts.direction + '=' + options.height
@@ -132,17 +132,17 @@
         function (current, next, opts) {
             var options = this.getOptions();
             
-            $(current).css({
+            current.css({
                 'z-index': options.zIndex + 100
             });
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
             
-            $(current).fadeOut(options.speed, this.complete);
+            current.fadeOut(options.speed, this.complete);
         }
     );
     /********************************************************************************/
@@ -378,7 +378,7 @@
                 text = '';
             }
             
-            $(getTitle()).fadeOut(function () {
+            getTitle().fadeOut(function () {
                 if (text.length != 0) {
                     $(this).html(text).fadeIn(options.titleSpeed);
                 }
@@ -407,7 +407,7 @@
                     continue;
                 }
                 
-                $(getElement(i)).css('z-index', options.zIndex);
+                getElement(i).css('z-index', options.zIndex);
             }
         };
     

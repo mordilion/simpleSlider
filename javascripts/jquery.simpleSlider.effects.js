@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.2.15 - (2011/11/08)
+ * @version: 1.3.15 - (2011/11/10)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -16,18 +16,18 @@
         var squareWidth = Math.ceil(opts.width / opts.squaresPerWidth);
         var squareHeight = Math.ceil(opts.height / opts.squaresPerHeight);
         
-        for (var i = 1; i <= opts.squaresPerHeight; i++) {
-            for (var j = 1; j <= opts.squaresPerWidth; j++) {
-                var el = $(element).append('<div id="simpleSlider-square-' + i + '-' + j + '" />').find('#simpleSlider-square-' + i + '-' + j);
+        for (var row = 1; row <= opts.squaresPerHeight; row++) {
+            for (var col = 1; col <= opts.squaresPerWidth; col++) {
+                var el = element.append('<div id="simpleSlider-square-' + row + '-' + col + '" />').find('#simpleSlider-square-' + row + '-' + col);
                 $(el).css({
                     'display': 'block',
                     'position': 'absolute',
-                    'left': (j-1) * squareWidth,
-                    'top': (i-1) * squareHeight,
+                    'left': (col-1) * squareWidth,
+                    'top': (row-1) * squareHeight,
                     'width': squareWidth,
                     'height': squareHeight,
-                    'background-image': 'url(' + $(element).find('img:first').attr('src') + ')',
-                    'background-position': '-' + ((j-1) * squareWidth) + 'px -' + ((i-1) * squareHeight) + 'px'
+                    'background-image': 'url(' + element.find('img:first').attr('src') + ')',
+                    'background-position': '-' + ((col-1) * squareWidth) + 'px -' + ((row-1) * squareHeight) + 'px'
                 });
             }
         }
@@ -79,17 +79,16 @@
         }
         
         $('img:first', next).hide();
-        $(next).css({
+        next.css({
             'top': 0,
             'left': 0,
             'z-index': options.zIndex + 100
         }).show();
-        $(current).css('z-index', options.zIndex + 90);
+        current.css('z-index', options.zIndex + 90);
         
         var dimension = $.simpleSlider.buildSquareMatrix(next, options);
-        $('div:[id*="simpleSlider-square"]', next).css(init);
-
-        $('div:[id*="simpleSlider-square"]', next).each(function (index) {
+        $('div:[id*="simpleSlider-square"]', next).css(init).each(function (index) {
+            var square = $(this);
             var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
             var wait = col - 1;
             
@@ -98,7 +97,7 @@
             }
             wait *= (options.speed / spw);
             
-            $(this).delay(wait).animate(ani, {
+            square.delay(wait).animate(ani, {
                 duration: options.speed / 2,
                 complete: callback
             });
@@ -110,7 +109,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': parseInt(opts.direction + options.width) * -1,
                 'z-index': options.zIndex + 100
@@ -121,7 +120,7 @@
                 complete: this.complete
             });
             
-            $(current).css('z-index', options.zIndex + 90);
+            current.css('z-index', options.zIndex + 90);
         }
     );
     
@@ -130,7 +129,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
             
-            $(next).css({
+            next.css({
                 'top': parseInt(opts.direction + options.height) * -1,
                 'left': 0,
                 'z-index': options.zIndex + 100
@@ -141,7 +140,7 @@
                 complete: this.complete
             });
             
-            $(current).css('z-index', options.zIndex + 90);
+            current.css('z-index', options.zIndex + 90);
         }
     );
     
@@ -150,7 +149,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': parseInt(opts.direction + options.width) * -1,
                 'opacity': 0,
@@ -163,7 +162,7 @@
                 complete: this.complete
             });
             
-            $(current).css('z-index', options.zIndex + 90);
+            current.css('z-index', options.zIndex + 90);
         }
     );
     
@@ -172,7 +171,7 @@
         function (current, next, opts) {
             var options = this.getOptions();
             
-            $(next).css({
+            next.css({
                 'top': parseInt(opts.direction + options.height) * -1,
                 'left': 0,
                 'opacity': 0,
@@ -185,7 +184,7 @@
                 complete: this.complete
             });
             
-            $(current).css('z-index', options.zIndex + 90);
+            current.css('z-index', options.zIndex + 90);
         }
     );
     
@@ -194,14 +193,14 @@
         function (current, next, opts) {
             var options     = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             var self        = this;
-            var margin      = parseInt($(current).css('margin-left'));
+            var margin      = parseInt(current.css('margin-left'));
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             margin += opts.direction == '+' ? dimension[0] : 0;
@@ -225,14 +224,14 @@
         function (current, next, opts) {
             var options     = $.extend({}, this.getOptions(), opts, {squaresPerWidth: 1});
             var self        = this;
-            var margin      = parseInt($(current).css('margin-top'));
+            var margin      = parseInt(current.css('margin-top'));
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             margin += opts.direction == '+' ? dimension[1] : 0;
@@ -265,26 +264,28 @@
                 }
             }
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
             $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = (row + col) - 1;
+                
                 if (opts.direction == '+') {
                     wait = (spw + sph) - wait;
                 }
                 wait *= options.speed / (spw + sph - 1);
 
-                $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+                square.delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
             });
         }
     );
@@ -303,12 +304,12 @@
                 }
             }
             
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction != '+' ? dimension[0] : 0;
@@ -317,19 +318,20 @@
             $('img:first', current).hide();
             
             $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = (row + col) - 1;
                 
                 if (opts.direction == '+') {
                     wait = (spw + sph) - wait;
-                    backgroundPosition = $(this).css('background-position');
+                    backgroundPosition = square.css('background-position');
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
                 wait *= options.speed / (spw + sph - 1);
                 
-                $(this).delay(wait).animate({
+                square.delay(wait).animate({
                     'height': 0,
                     'width': 0,
                     'margin-left': marginLeft,
@@ -363,18 +365,19 @@
                 }
             }
 
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
             var lastWait = 0;
             $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = 0;
@@ -383,7 +386,7 @@
                 } while(wait == lastWait);
                 lastWait = wait;
 
-                $(this).delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+                square.delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
             });
         }
     );
@@ -402,12 +405,12 @@
                 }
             }
 
-            $(next).css({
+            next.css({
                 'top': 0,
                 'left': 0,
                 'z-index': options.zIndex + 90
             }).show();
-            $(current).css('z-index', options.zIndex + 100);
+            current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction != '+' ? dimension[0] : 0;
@@ -416,19 +419,20 @@
             $('img:first', current).hide();
             
             $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+                var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = col + (spw * (row - 1));
                 
                 if (opts.direction == '+') {
                     wait = (spw * sph) - wait;
-                    backgroundPosition = $(this).css('background-position');
+                    backgroundPosition = square.css('background-position');
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
                 wait *= options.speed / (spw * sph - 1);
 
-                $(this).delay(wait).animate({
+                square.delay(wait).animate({
                     'height': 0,
                     'width': 0,
                     'margin-left': marginLeft,
