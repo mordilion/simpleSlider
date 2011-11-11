@@ -1,7 +1,7 @@
 body {
-	background: #393939;
+	background: #F0F0F0;
 	font: 12px Arial, Helvetica, Sans-Serif;
-	color: #FFF;
+	color: #222;
 	margin: 0;
 	padding: 30px;
 	text-align: left;
@@ -9,21 +9,21 @@ body {
 
 h1 {
 	font-size: 26px;
-	font-weight: normal;
+	font-weight: bold;
 	margin: 0 0 10px 0;
 	padding: 0;
 }
 
 h2 {
 	font-size: 20px;
-	font-weight: normal;
+	font-weight: bold;
 	margin: 30px 0 10px 0;
 	padding: 0;
 }	
 
 h3 {
 	font-size: 16px;
-	font-weight: normal;
+	font-weight: bold;
 	margin: 30px 0 10px 0;
 	padding: 0;
 }	
@@ -44,24 +44,21 @@ pre {
 }
 
 a {
-    color: #9F0;
+    color: #00F0F0;
     font-weight: normal;
     text-decoration: none;
 }
 
 a:hover {
-    color: #FFF;
     text-decoration: underline;
 }
 
 
 /* simpleSlider */
 /**************************************************************************************/
-/*
 #simpleSlider-slider {
     width: 640px;
     margin: 0 auto;
 }
-*/
 /**************************************************************************************/
 
