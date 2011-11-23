@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.3.15 - (2011/11/10)
+ * @version: 1.3.15 - (2011/11/23)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -66,11 +66,11 @@
     
     // main method for slice effects
     $.simpleSlider.sliceEffect = function (current, next, options, instance, init, ani) {
-        var self        = instance;
-        var spw         = options.squaresPerWidth;
-        var sph         = options.squaresPerHeight;
-        var callback    = function () {
-            if ($('div:[id*="simpleSlider-square-"]:animated', next).length == 1) {
+        var self     = instance;
+        var spw      = options.squaresPerWidth;
+        var sph      = options.squaresPerHeight;
+        var callback = function () {
+            if ($('div:[id*="simpleSlider-square-"]:animated', next).length === 1) {
                 $('div:[id*="simpleSlider-square-"]', next).remove();
                 $('img:first', current).hide();
                 $('img:first', next).show();
@@ -92,7 +92,7 @@
             var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
             var wait = col - 1;
             
-            if (options.direction == '+') {
+            if (options.direction === '+') {
                 wait = (spw + sph) - wait;
             }
             wait *= (options.speed / spw);
@@ -191,9 +191,9 @@
     // horizontal blind effect
     $.simpleSlider.addEffect('blindHorizontal',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
-            var self        = this;
-            var margin      = parseInt(current.css('margin-left'));
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
+            var self    = this;
+            var margin  = parseInt(current.css('margin-left'));
             
             next.css({
                 'top': 0,
@@ -203,7 +203,7 @@
             current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
-            margin += opts.direction == '+' ? dimension[0] : 0;
+            margin += opts.direction === '+' ? dimension[0] : 0;
             
             $('img:first', current).hide();
             $('div:[id*="simpleSlider-square"]', current).show().animate({
@@ -222,9 +222,9 @@
     // vertical blind effect
     $.simpleSlider.addEffect('blindVertical',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts, {squaresPerWidth: 1});
-            var self        = this;
-            var margin      = parseInt(current.css('margin-top'));
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerWidth: 1});
+            var self    = this;
+            var margin  = parseInt(current.css('margin-top'));
             
             next.css({
                 'top': 0,
@@ -234,7 +234,7 @@
             current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
-            margin += opts.direction == '+' ? dimension[1] : 0;
+            margin += opts.direction === '+' ? dimension[1] : 0;
             
             $('img:first', current).hide();
             $('div:[id*="simpleSlider-square"]', current).show().animate({
@@ -253,12 +253,12 @@
     // rain effect
     $.simpleSlider.addEffect('rain',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts);
-            var self        = this;
-            var spw         = options.squaresPerWidth;
-            var sph         = options.squaresPerHeight;
-            var callback    = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+            var options  = $.extend({}, this.getOptions(), opts);
+            var self     = this;
+            var spw      = options.squaresPerWidth;
+            var sph      = options.squaresPerHeight;
+            var callback = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
@@ -280,7 +280,7 @@
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = (row + col) - 1;
                 
-                if (opts.direction == '+') {
+                if (opts.direction === '+') {
                     wait = (spw + sph) - wait;
                 }
                 wait *= options.speed / (spw + sph - 1);
@@ -293,12 +293,12 @@
     // rain grow effect
     $.simpleSlider.addEffect('rainGrow',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts);
-            var self        = this;
-            var spw         = options.squaresPerWidth;
-            var sph         = options.squaresPerHeight;
-            var callback    = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+            var options  = $.extend({}, this.getOptions(), opts);
+            var self     = this;
+            var spw      = options.squaresPerWidth;
+            var sph      = options.squaresPerHeight;
+            var callback = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
@@ -312,8 +312,8 @@
             current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
-            var marginLeft = opts.direction != '+' ? dimension[0] : 0;
-            var marginTop = opts.direction != '+' ? dimension[1] : 0;
+            var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
+            var marginTop = opts.direction !== '+' ? dimension[1] : 0;
             var backgroundPosition = '0 0';
             $('img:first', current).hide();
             
@@ -323,7 +323,7 @@
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = (row + col) - 1;
                 
-                if (opts.direction == '+') {
+                if (opts.direction === '+') {
                     wait = (spw + sph) - wait;
                     backgroundPosition = square.css('background-position');
                 } else {
@@ -354,12 +354,12 @@
     // rain random effect
     $.simpleSlider.addEffect('rainRandom',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts);
-            var self        = this;
-            var spw         = options.squaresPerWidth;
-            var sph         = options.squaresPerHeight;
-            var callback    = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+            var options  = $.extend({}, this.getOptions(), opts);
+            var self     = this;
+            var spw      = options.squaresPerWidth;
+            var sph      = options.squaresPerHeight;
+            var callback = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
@@ -383,7 +383,7 @@
                 var wait = 0;
                 do {
                     var wait = Math.floor(Math.random() * (spw * sph)) * (options.speed / (spw * sph));
-                } while(wait == lastWait);
+                } while(wait === lastWait);
                 lastWait = wait;
 
                 square.delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
@@ -394,12 +394,12 @@
     // rain winding effect
     $.simpleSlider.addEffect('rainWinding',
         function (current, next, opts) {
-            var options     = $.extend({}, this.getOptions(), opts);
-            var self        = this;
-            var spw         = options.squaresPerWidth;
-            var sph         = options.squaresPerHeight;
-            var callback    = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length == 0) {
+            var options  = $.extend({}, this.getOptions(), opts);
+            var self     = this;
+            var spw      = options.squaresPerWidth;
+            var sph      = options.squaresPerHeight;
+            var callback = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
@@ -413,8 +413,8 @@
             current.css('z-index', options.zIndex + 100);
             
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
-            var marginLeft = opts.direction != '+' ? dimension[0] : 0;
-            var marginTop = opts.direction != '+' ? dimension[1] : 0;
+            var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
+            var marginTop = opts.direction !== '+' ? dimension[1] : 0;
             var backgroundPosition = '0 0';
             $('img:first', current).hide();
             
@@ -424,7 +424,7 @@
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = col + (spw * (row - 1));
                 
-                if (opts.direction == '+') {
+                if (opts.direction === '+') {
                     wait = (spw * sph) - wait;
                     backgroundPosition = square.css('background-position');
                 } else {

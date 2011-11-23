@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.3.15 - (2011/11/10)
+ * @version: 1.3.15 - (2011/11/23)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -69,7 +69,7 @@
             do {
                 var rand = Math.floor(Math.random() * effectNames.length);
                 name = effectNames[rand];
-            } while(opts.last == name || name == 'random');
+            } while(opts.last === name || name === 'random');
             
             effect = effects[name];
             if (effect) {
@@ -152,19 +152,19 @@
      * slider object
      ********************************************************************************/
     function SimpleSlider(element, options) {
-        var self        = this;
-        var list        = $('ul:first', element);
-        var wrapper     = null;
-        var timeout     = null;
+        var self      = this;
+        var list      = $('ul:first', element);
+        var wrapper   = null;
+        var timeout   = null;
         
-        var count       = $('li', list).length;
-        var index       = 0;
+        var count     = $('li', list).length;
+        var index     = 0;
         
-        var last        = '';
+        var last      = '';
 
-        var clicked     = false;        
-        var slideable   = true;
-        var pause       = false;
+        var clicked   = false;        
+        var slideable = true;
+        var pause     = false;
         
         
         /**
@@ -178,7 +178,7 @@
             
             if (classes != null) {
                 $(classes).each(function (index, value) {
-                    if (value.substring(0, 5) == 'theme') {
+                    if (value.substring(0, 5) === 'theme') {
                         theme = value;
                         $(element).removeClass(theme);
                         return true;
@@ -192,7 +192,7 @@
                 'width': options.width, 
                 'overflow': 'hidden', 
                 'position': 'relative'
-            }).wrap('<div class="simpleSlider' + (theme != null ? ' ' + theme : '') + '" id="simpleSlider-' + element.id + '" />');
+            }).wrap('<div class="simpleSlider' + (theme !== null ? ' ' + theme : '') + '" id="simpleSlider-' + element.id + '" />');
             wrapper = $('#simpleSlider-' + element.id);
                 
             // setup the title
@@ -379,7 +379,7 @@
             }
             
             getTitle().fadeOut(function () {
-                if (text.length != 0) {
+                if (text.length !== 0) {
                     $(this).html(text).fadeIn(options.titleSpeed);
                 }
             });
@@ -403,7 +403,7 @@
             $('img:first', getElement(index)).show();
             
             for (var i = 0; i < count; i++) {
-                if (i == index || i == nextIndex) {
+                if (i === index || i === nextIndex) {
                     continue;
                 }
                 
@@ -416,13 +416,13 @@
          * starts the slide
          */
         function slide(to, click) {
-            var effect      = null;
-            var name        = '';
-            var opts        = {};
-            var nextIndex   = 0;
-            var direction   = '-';
-            var current     = null;
-            var next        = null;
+            var effect    = null;
+            var name      = '';
+            var opts      = {};
+            var nextIndex = 0;
+            var direction = '-';
+            var current   = null;
+            var next      = null;
             
             if (!slideable) {
                 return;
@@ -451,7 +451,7 @@
                     break;
             }
             
-            if (index != nextIndex) {
+            if (index !== nextIndex) {
                 current = getElement(index);
                 next = getElement(nextIndex);
                 index = nextIndex;
@@ -461,12 +461,12 @@
                     if (options.effect.length > 1) {
                         do {
                             name = options.effect[Math.floor(Math.random() * options.effect.length)];
-                        } while(name == last);
+                        } while(name === last);
                     } else {
                         name = options.effect[0];
                     }
                     last = name;
-                } else if (options.effect == 'random') {
+                } else if (options.effect === 'random') {
                     direction = Math.floor(Math.random() * 2) == 0 ? '+' : '-';
                     $.extend(opts, {last: last, direction: direction});
                     name = 'random';
@@ -480,7 +480,8 @@
                     resetListElements();
                     resetNavigation();
                     var result = effect.call(self, current, next, opts);
-                    if (options.effect == 'random') {
+                    
+                    if (options.effect === 'random') {
                         last = result;
                     }
                 }
@@ -535,6 +536,7 @@
         resetNavigation();
         resetTitle(getElement(index));
         resetListElements();
+        
         if (options.auto) {
             resetTimeout();
         }
