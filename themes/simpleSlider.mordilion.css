@@ -1,7 +1,7 @@
 /**
  * simpleSlider - theme - mordilion
  *
- * @version: 0.2 - (2011/11/11)
+ * @version: 0.3 - (2011/11/23)
  * @author Henning Huncke
  *
  * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
@@ -29,17 +29,17 @@
 }
 
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button {
-    background: #FFF;
-    border: 1px solid #999;
+    background: url('mordilion/images/navigation-button.png') no-repeat left top transparent;
+    border: none;
+    border-radius: 0;
+    height: 10px;
+    padding: 0;
+    width: 10px;
 }
 
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button:hover,
-.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button.current:hover {
-    background: #FF9900;
-}
-
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button.current {
-    background: #0099FF;
+    background: url('mordilion/images/navigation-button.png') no-repeat left bottom transparent;
 }
 /**************************************************************************************/
 
