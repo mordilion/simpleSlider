@@ -19,7 +19,7 @@
 }
 
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons {
-    bottom: 11px;
+    bottom: 12px;
     left: 15px;
     top: auto;
 }
@@ -31,16 +31,15 @@
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button {
     background: #FFF;
     border: 1px solid #999;
-    border-radius: 0;
-    padding: 6px;
-    
-    -moz-box-shadow: 0 0 2px #000;
-    -webkit-box-shadow: 0 0 2px #000;
-    box-shadow: 0 0 2px #000;
+}
+
+.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button:hover,
+.simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button.current:hover {
+    background: #FF9900;
 }
 
 .simpleSlider.theme-mordilion .simpleSlider-navigation-buttons .simpleSlider-navigation-button.current {
-    background: #06D;
+    background: #0099FF;
 }
 /**************************************************************************************/
 
