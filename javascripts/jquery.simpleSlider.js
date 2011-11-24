@@ -18,7 +18,7 @@
      * static constructs
      ********************************************************************************/
     $.simpleSlider = {
-        version: '1.2.15',
+        version: '1.3.15',
     
         addEffect: function (name, fn) {
             effects[name] = fn;
