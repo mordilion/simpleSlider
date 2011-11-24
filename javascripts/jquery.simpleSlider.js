@@ -40,6 +40,7 @@
             squaresPerWidth: 7,         // squares per width
             titleOpacity: 0.7,          // opacity of the title
             titleSpeed: 500,            // speed of title fade in ms
+            useImageTitle: false,       // use the value of image-title attribute to display title
             
             hoverPause: true,           // pause slide on hover
             navigation: true,           // show previous, next and buttons
@@ -371,10 +372,15 @@
             if (!options.title) {
                 return;
             }
-            
-            var text = $('div:first', getElement(index)).html();
+    
+            var text = '';
+            if (options.useImageTitle) {
+                text = $('img:first', getElement(index)).attr('title');
+            } else {
+                text = $('div:first', getElement(index)).html();
+            }
 
-            if (text === null) {
+            if (text == null) {
                 text = '';
             }
             
