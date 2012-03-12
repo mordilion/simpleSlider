@@ -558,7 +558,7 @@
              * public method for slide to previous
              */
             previous: function () {
-                self.slide('prev', true);
+                slide('prev', true);
                 return self;
             },
             
@@ -566,7 +566,7 @@
              * public method to slide to next
              */
             next: function () {
-                self.slide('next', true);
+                slide('next', true);
                 return self;
             },
             
@@ -624,7 +624,7 @@
             $(this).data(dataName, element);
         });
         
-        return this;
+        return options.api ? element : this;
     };
     /********************************************************************************/
 
