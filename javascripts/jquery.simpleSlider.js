@@ -1,10 +1,10 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.3.15 - (2011/11/24)
+ * @version: 1.4.15 - (2012/03/12)
  * @author Henning Huncke
  *
- * Copyright (c) 2011 Henning Huncke (http://www.devjunkie.de)
+ * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
  * Licensed under the GPL (LICENSE) licens.
  *
  * Built for jQuery library
@@ -18,7 +18,7 @@
      * static constructs
      ********************************************************************************/
     $.simpleSlider = {
-        version: '1.3.15',
+        version: '1.4.15',
     
         addEffect: function (name, fn) {
             effects[name] = fn;
@@ -196,18 +196,6 @@
             }).wrap('<div class="simpleSlider' + (theme !== null ? ' ' + theme : '') + '" id="simpleSlider-' + element.id + '" />');
             wrapper = $('#simpleSlider-' + element.id);
                 
-            // setup the title
-            $(element).append('<div class="simpleSlider-title" id="simpleSlider-' + element.id + '-title" />');
-            var title = getTitle();
-            $(title).css({
-                'bottom': 0, 
-                'left': 0, 
-                'width': options.width - parseInt($(title).css('padding-left')) - parseInt($(title).css('padding-right')),
-                'opacity': options.titleOpacity,
-                'position': 'absolute',
-                'z-index': options.zIndex + 120
-            }).hide();
-            
             // setup all list elements
             $('li', list).css({
                 'position': 'absolute',
@@ -217,7 +205,48 @@
             }).each(function () {
                 $('div:first', this).hide();
             });
+            
+            // call other init-methods
+            initTitle();
         };
+        
+        
+        /**
+         * initialization the title elements
+         */
+        function initTitle() {
+            // setup the title main element
+            $(element).append('<div class="simpleSlider-title" id="simpleSlider-' + element.id + '-title" />');
+            var title = getTitle();
+            
+            // append the transparency and content elements
+            $(title).append('<div class="simpleSlider-title-transparency" id="simpleSlider-' + element.id + '-title-transparency" />');
+            $(title).append('<div class="simpleSlider-title-content" id="simpleSlider-' + element.id + '-title-content" />');
+            
+            var transparency = getTitleTransparency();
+            
+            // style the elements
+            $(title).css({
+                'bottom': 0, 
+                'display': 'block',
+                'left': 0, 
+                'width': options.width - parseInt($(title).css('padding-left')) - parseInt($(title).css('padding-right')),
+                'position': 'absolute',
+                'z-index': options.zIndex + 120
+            }).hide();
+            
+            $(transparency).css({
+                'display': 'block',
+                'height': '100%',
+                'left': 0,
+                'opacity': options.titleOpacity,
+                'position': 'absolute',
+                'top': 0,
+                'width': '100%',
+                'z-index': -1
+            });
+        };
+        
         
         /**
          * initialization the navigation elements
@@ -344,6 +373,30 @@
         
         
         /**
+         * returns the title-trancparency element or the selector
+         */
+        function getTitleTransparency(asSelector) {
+            var selector = '#simpleSlider-' + element.id + '-title-transparency';
+            if (asSelector) {
+                return selector;
+            }
+            return $(selector, getTitle());
+        };
+        
+        
+        /**
+         * returns the title-content element or the selector
+         */
+        function getTitleContent(asSelector) {
+            var selector = '#simpleSlider-' + element.id + '-title-content';
+            if (asSelector) {
+                return selector;
+            }
+            return $(selector, getTitle());
+        };
+        
+        
+        /**
          * reset the timeout
          */
         function resetTimeout() {
@@ -386,7 +439,8 @@
             
             getTitle().fadeOut(function () {
                 if (text.length !== 0) {
-                    $(this).html(text).fadeIn(options.titleSpeed);
+                    getTitleContent().html(text);
+                    $(this).fadeIn(options.titleSpeed);
                 }
             });
         };

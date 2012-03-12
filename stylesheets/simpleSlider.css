@@ -16,9 +16,13 @@
 
 .simpleSlider div.simpleSlider-title {
     display: block;
-    background: #000;
+    background: transparent;
     color: #FFF;
     padding: 10px;
+}
+
+.simpleSlider div.simpleSlider-title div.simpleSlider-title-transparency {
+    background: #000;
 }
 
 .simpleSlider ol.simpleSlider-navigation-buttons {
