@@ -55,6 +55,7 @@
 }
 
 .simpleSlider .simpleSlider-navigation {
+    background: url('../images/transparent.gif');
 }
 
 .simpleSlider .simpleSlider-navigation a.simpleSlider-navigation-previous,
