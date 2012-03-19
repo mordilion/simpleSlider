@@ -205,6 +205,9 @@
             }).each(function () {
                 $('div:first', this).hide();
             });
+            getElement(index).css({
+                'z-index': options.zIndex + 110
+            });
             
             // call other init-methods
             initTitle();
@@ -571,6 +574,24 @@
             },
             
             /**
+             * public method to restart the slider
+             */
+            restart: function () {
+                slideable = false;
+                index = options.index;
+                resetNavigation();
+                resetTitle(getElement(index));
+                resetListElements();
+                getElement(index).css({
+                    'left': 0,
+                    'top': 0,
+                    'z-index': options.zIndex + 100
+                }).show();
+                resetTimeout(clicked);
+                slideable = true;
+            },
+            
+            /**
              * public method to finishing the slide (must be called after the slide is finished)
              */
             complete: function () {
@@ -586,13 +607,15 @@
                 return options;
             }
         });
+        
+        index = options.index < 0 ? count - 1 : options.index >= count ? 0 : options.index;
+        options.index = index;
   
         init();
         if (options.navigation) {
             initNavigation();
         }
         
-        index = options.index < 0 ? count - 1 : options.index >= count ? 0 : options.index;
         resetNavigation();
         resetTitle(getElement(index));
         resetListElements();
