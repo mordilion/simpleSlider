@@ -1,5 +1,5 @@
 # simpleSlider - A jQuery-Plugin to create easy and simple image sliders
-Version: 1.3.15
+Version: 1.4.17
 
 ## Requirements
 The simpleSlider needs minimum jQuery 1.4 to run without problems.
@@ -12,12 +12,14 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
 * Many good effects
 * Optional title to each image (as div or image-title-attribute)
 * Complete CSS designable
+* Public Methods to slide previous/next or restart
 
 ### Effects
 * Slide (Horizontal/Vertical)
 * Overlay Slide (Horizontal/Vertical)
-* Fade Slide (Horizontal/Vertical)
+* Fade & Slide (Horizontal/Vertical)
 * Blind (Horizontal/Vertical)
+* Split & Slide (Horizontal/Vertical)
 * Fade
 * Rain
 * RainGrow

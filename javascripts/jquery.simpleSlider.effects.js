@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.4.15 - (2012/03/12)
+ * @version: 1.4.17 - (2012/03/19)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -466,6 +466,96 @@
             var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             
             $.simpleSlider.sliceEffect(current, next, options, this, {'top': options.height * -1}, {'top': 0});
+        } 
+    );
+    
+    // split slide horizontal
+    $.simpleSlider.addEffect('splitSlideHorizontal',
+        function (current, next, opts) {
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1, squaresPerWidth: 2});
+            var self    = this;
+            var margin  = parseInt(current.css('width'));
+            
+            next.css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            current.css('z-index', options.zIndex + 100);
+            
+            var dimension = $.simpleSlider.buildSquareMatrix(current, options);
+            
+            $('img:first', current).hide();
+            $('div:[id*="simpleSlider-square"]', current).show();
+            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+                'width': 0
+            }, {
+                duration: options.speed,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                }
+            });
+            $('div:[id="simpleSlider-square-1-2"]', current).animate({
+                'width': 0,
+                'margin-left': margin / 2,
+                'backgroundPosition': '-' + margin + 'px 0px'
+            }, {
+                duration: options.speed,
+                step: function (now, fx) {
+                    if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
+                        $.simpleSlider.animateBackgroundPosition(fx);
+                    }
+                },
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            });
+        } 
+    );
+    
+    // split slide vertical
+    $.simpleSlider.addEffect('splitSlideVertical',
+        function (current, next, opts) {
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 2, squaresPerWidth: 1});
+            var self    = this;
+            var margin  = parseInt(current.css('height'));
+            
+            next.css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            current.css('z-index', options.zIndex + 100);
+            
+            var dimension = $.simpleSlider.buildSquareMatrix(current, options);
+            
+            $('img:first', current).hide();
+            $('div:[id*="simpleSlider-square"]', current).show();
+            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+                'height': 0
+            }, {
+                duration: options.speed,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                }
+            });
+            $('div:[id="simpleSlider-square-2-1"]', current).animate({
+                'height': 0,
+                'margin-top': margin / 2,
+                'backgroundPosition': '0px -' + margin + 'px'
+            }, {
+                duration: options.speed,
+                step: function (now, fx) {
+                    if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
+                        $.simpleSlider.animateBackgroundPosition(fx);
+                    }
+                },
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            });
         } 
     );
     
