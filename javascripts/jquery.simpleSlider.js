@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.4.17 - (2012/03/19)
+ * @version: 1.4.17 - (2012/03/26)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -18,7 +18,7 @@
      * static constructs
      ********************************************************************************/
     $.simpleSlider = {
-        version: '1.4.15',
+        version: '1.4.17',
     
         addEffect: function (name, fn) {
             effects[name] = fn;
@@ -35,7 +35,7 @@
             effect: 'random',           // "random" => random effect or "vertical", "horizontal", ...
             index: 0,                   // index of the first image to show
             keepSlide: true,            // keep automatic sliding
-            speed: 1200,                // animation speed
+            speed: 1500,                // animation speed
             squaresPerHeight: 5,        // squares per height
             squaresPerWidth: 7,         // squares per width
             titleOpacity: 0.7,          // opacity of the title
