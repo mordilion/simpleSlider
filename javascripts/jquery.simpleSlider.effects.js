@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.4.17 - (2012/03/19)
+ * @version: 1.4.17 - (2012/03/26)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -86,19 +86,21 @@
         }).show();
         current.css('z-index', options.zIndex + 90);
         
+        var speedModifier = spw > sph ? spw : sph;
         var dimension = $.simpleSlider.buildSquareMatrix(next, options);
         $('div:[id*="simpleSlider-square"]', next).css(init).each(function (index) {
             var square = $(this);
+            var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
             var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
-            var wait = col - 1;
+            var wait = spw > sph ? col - 1 : row - 1;
             
             if (options.direction === '+') {
-                wait = (spw + sph) - wait;
+                wait = (spw + sph) - wait - 2;
             }
-            wait *= (options.speed / spw);
+            wait *= options.speed / (speedModifier * 2);
             
             square.delay(wait).animate(ani, {
-                duration: options.speed / 2,
+                duration: options.speed / (speedModifier / 2),
                 complete: callback
             });
         });
@@ -271,6 +273,7 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
+            var speedModifier = spw > sph ? sph : spw;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
@@ -285,7 +288,7 @@
                 }
                 wait *= options.speed / (spw + sph - 1);
 
-                square.delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+                square.delay(wait).fadeOut(options.speed / speedModifier, callback);
             });
         }
     );
@@ -311,6 +314,7 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
+            var speedModifier = spw > sph ? sph : spw;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
             var marginTop = opts.direction !== '+' ? dimension[1] : 0;
@@ -338,7 +342,7 @@
                     'margin-top': marginTop,
                     'backgroundPosition': backgroundPosition
                 }, {
-                    duration: options.speed / 4,
+                    duration: options.speed / speedModifier,
                     step: function (now, fx) {
                         if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
                             $.simpleSlider.animateBackgroundPosition(fx);
@@ -372,6 +376,7 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
+            var speedModifier = spw > sph ? sph : spw;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
@@ -382,11 +387,11 @@
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
                 var wait = 0;
                 do {
-                    var wait = Math.floor(Math.random() * (spw * sph)) * (options.speed / (spw * sph));
+                    var wait = (Math.random() * (spw * sph)) * (options.speed / (spw * sph));
                 } while(wait === lastWait);
                 lastWait = wait;
 
-                square.delay(wait).fadeOut(Math.floor(options.speed / 4), callback);
+                square.delay(wait).fadeOut(options.speed / speedModifier, callback);
             });
         }
     );
@@ -412,6 +417,7 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
+            var speedModifier = spw > sph ? sph : spw;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
             var marginTop = opts.direction !== '+' ? dimension[1] : 0;
@@ -439,7 +445,7 @@
                     'margin-top': marginTop,
                     'backgroundPosition': backgroundPosition
                 }, {
-                    duration: options.speed / 4,
+                    duration: options.speed / speedModifier,
                     step: function (now, fx) {
                         if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
                             $.simpleSlider.animateBackgroundPosition(fx);
