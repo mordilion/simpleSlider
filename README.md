@@ -1,5 +1,5 @@
 # simpleSlider - A jQuery-Plugin to create easy and simple image sliders
-Version: 1.4.17
+Version: 1.4.18
 
 ## Requirements
 The simpleSlider needs minimum jQuery 1.4 to run without problems.
@@ -26,6 +26,7 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
 * RainRandom
 * RainWinding
 * Slice Up/Down
+* Swirl
 
 ## Usage
     <script type="text/javascript" src="javascripts/jquery.simpleSlider.js" />          # needed to use
