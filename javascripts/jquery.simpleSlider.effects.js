@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.4.17 - (2012/03/26)
+ * @version: 1.4.18 - (2012/03/30)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -86,7 +86,8 @@
         }).show();
         current.css('z-index', options.zIndex + 90);
         
-        var speedModifier = spw > sph ? spw : sph;
+        var speedModifier = spw > sph ? spw / 2 : sph / 2;
+        var delayModifier = speedModifier * 4;
         var dimension = $.simpleSlider.buildSquareMatrix(next, options);
         $('div:[id*="simpleSlider-square"]', next).css(init).each(function (index) {
             var square = $(this);
@@ -97,10 +98,10 @@
             if (options.direction === '+') {
                 wait = (spw + sph) - wait - 2;
             }
-            wait *= options.speed / (speedModifier * 2);
+            wait *= options.speed / delayModifier;
             
             square.delay(wait).animate(ani, {
-                duration: options.speed / (speedModifier / 2),
+                duration: options.speed / speedModifier,
                 complete: callback
             });
         });
@@ -274,6 +275,7 @@
             current.css('z-index', options.zIndex + 100);
             
             var speedModifier = spw > sph ? sph : spw;
+            var delayModifier = spw + sph - 1;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
@@ -286,7 +288,7 @@
                 if (opts.direction === '+') {
                     wait = (spw + sph) - wait;
                 }
-                wait *= options.speed / (spw + sph - 1);
+                wait *= options.speed / delayModifier;
 
                 square.delay(wait).fadeOut(options.speed / speedModifier, callback);
             });
@@ -315,6 +317,7 @@
             current.css('z-index', options.zIndex + 100);
             
             var speedModifier = spw > sph ? sph : spw;
+            var delayModifier = spw + sph - 1;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
             var marginTop = opts.direction !== '+' ? dimension[1] : 0;
@@ -333,7 +336,7 @@
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
-                wait *= options.speed / (spw + sph - 1);
+                wait *= options.speed / delayModifier;
                 
                 square.delay(wait).animate({
                     'height': 0,
@@ -376,7 +379,7 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
-            var speedModifier = spw > sph ? sph : spw;
+            var speedModifier = spw > sph ? (spw * sph) / spw : (spw * sph) / sph;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
@@ -417,7 +420,8 @@
             }).show();
             current.css('z-index', options.zIndex + 100);
             
-            var speedModifier = spw > sph ? sph : spw;
+            var speedModifier = spw > sph ? (spw * sph) / spw : (spw * sph) / sph;
+            var delayModifier = spw * sph - 1;
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             var marginLeft = opts.direction !== '+' ? dimension[0] : 0;
             var marginTop = opts.direction !== '+' ? dimension[1] : 0;
@@ -436,7 +440,7 @@
                 } else {
                     backgroundPosition = '-' + ((col) * dimension[0]) + 'px -' + ((row) * dimension[1]) + 'px';
                 }
-                wait *= options.speed / (spw * sph - 1);
+                wait *= options.speed / delayModifier;
 
                 square.delay(wait).animate({
                     'height': 0,
@@ -563,6 +567,83 @@
                 }
             });
         } 
+    );
+    
+    // swirl
+    $.simpleSlider.addEffect('swirl',
+        function (current, next, opts) {
+            var options  = $.extend({}, this.getOptions(), opts);
+            var self     = this;
+            var spw      = options.squaresPerWidth;
+            var sph      = options.squaresPerHeight;
+            var callback = function () {
+                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            }
+
+            next.css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            current.css('z-index', options.zIndex + 100);
+            
+            var speedModifier = spw > sph ? (spw * sph) / spw : (spw * sph) / sph;
+            var delayModifier = (spw * sph);
+            var dimension = $.simpleSlider.buildSquareMatrix(current, options);
+            $('img:first', current).hide();
+            
+            var dowhile = true;
+            var index = 0;
+            var dir = 0;
+            var col = 1;
+            var row = 1;
+            
+            while (dowhile) {
+                var count = (dir == 0 || dir == 2) ? spw : sph;
+            
+                for (var i = 1; i <= count; i++) {
+                    var square = $('div:[id="simpleSlider-square-' + row + '-' + col + '"]', current);
+                    
+                    if (i == count) {
+                        dir = ++dir % 4;
+                    }
+                    
+                    switch (dir) {
+                        case 0:
+                            col++;
+                            spw = i == count ? --spw : spw;
+                            break;
+                            
+                        case 1:
+                            row++;
+                            sph = i == count ? --sph : sph;
+                            break;
+                            
+                        case 2:
+                            col--;
+                            spw = i == count ? --spw : spw;
+                            break;
+                            
+                        case 3:
+                            row--;
+                            sph = i == count ? --sph : sph;
+                            break;
+                    }
+                    
+                    square.delay((options.speed / delayModifier) * index).fadeOut(options.speed / speedModifier, callback);
+                    index++;
+                }
+                
+                var maxSquares = sph > spw ? sph : spw;
+                var minSquares = sph < spw ? sph : spw;
+                var check = maxSquares - minSquares;
+                
+                dowhile = (spw > check) || (sph > check);
+            }
+        }
     );
     
 })(jQuery);
