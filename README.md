@@ -8,7 +8,6 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
 
 ### Main-Features
 * Create multiple instances of slider
-* Public methods to slide forward or backward
 * Many good effects
 * Optional title to each image (as div or image-title-attribute)
 * Complete CSS designable
