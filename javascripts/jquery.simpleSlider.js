@@ -1,7 +1,7 @@
 /**
  * simpleSlider - jQuery plugin
  *
- * @version: 1.4.18 - (2012/03/30)
+ * @version: 1.4.18 - (2012/04/10)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -18,7 +18,7 @@
      * static constructs
      ********************************************************************************/
     $.simpleSlider = {
-        version: '1.4.17',
+        version: '1.4.18',
     
         addEffect: function (name, fn) {
             effects[name] = fn;
