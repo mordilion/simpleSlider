@@ -1,7 +1,7 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.4.18 - (2012/04/10)
+ * @version: 1.4.19 - (2012/04/10)
  * @author Henning Huncke
  *
  * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
@@ -52,6 +52,12 @@
 	        'background-position',
 	        (fx.start[0] + (fx.pos * (fx.end[0] - fx.start[0]))) + 'px ' + (fx.start[1] + (fx.pos * (fx.end[1] - fx.start[1]))) + 'px'
 		);
+    };
+    
+    $.simpleSlider.stepMethodBackgroundPosition = function (now, fx) {
+        if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
+            $.simpleSlider.animateBackgroundPosition(fx);
+        }
     };
     
     // method to parse the given background-position value on animate
@@ -346,11 +352,7 @@
                     'backgroundPosition': backgroundPosition
                 }, {
                     duration: options.speed / speedModifier,
-                    step: function (now, fx) {
-                        if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
-                            $.simpleSlider.animateBackgroundPosition(fx);
-                        }
-                    },                    
+                    step: $.simpleSlider.stepMethodBackgroundPosition,                    
                     complete: callback
                 });
 
@@ -450,11 +452,7 @@
                     'backgroundPosition': backgroundPosition
                 }, {
                     duration: options.speed / speedModifier,
-                    step: function (now, fx) {
-                        if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
-                            $.simpleSlider.animateBackgroundPosition(fx);
-                        }
-                    },                    
+                    step: $.simpleSlider.stepMethodBackgroundPosition,                    
                     complete: callback
                 });
             });
@@ -476,6 +474,75 @@
             var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 1});
             
             $.simpleSlider.sliceEffect(current, next, options, this, {'top': options.height * -1}, {'top': 0});
+        } 
+    );
+    
+    // split slide
+    $.simpleSlider.addEffect('splitSlide',
+        function (current, next, opts) {
+            var options = $.extend({}, this.getOptions(), opts, {squaresPerHeight: 2, squaresPerWidth: 2});
+            var self    = this;
+            var marginH = parseInt(current.css('height'));
+            var marginW = parseInt(current.css('width'));
+            
+            next.css({
+                'top': 0,
+                'left': 0,
+                'z-index': options.zIndex + 90
+            }).show();
+            current.css('z-index', options.zIndex + 100);
+            
+            var dimension = $.simpleSlider.buildSquareMatrix(current, options);
+            
+            $('img:first', current).hide();
+            $('div:[id*="simpleSlider-square"]', current).show();
+            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+                'height': 0,
+                'width': 0
+            }, {
+                duration: options.speed,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                }
+            });
+            $('div:[id="simpleSlider-square-1-2"]', current).animate({
+                'height': 0,
+                'width': 0,
+                'margin-left': marginW / 2,
+                'backgroundPosition': '-' + marginW + 'px 0px'
+            }, {
+                duration: options.speed,
+                step: $.simpleSlider.stepMethodBackgroundPosition,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                }
+            });
+            $('div:[id="simpleSlider-square-2-1"]', current).animate({
+                'height': 0,
+                'width': 0,
+                'margin-top': marginH / 2,
+                'backgroundPosition': '0px -' + marginH + 'px'
+            }, {
+                duration: options.speed,
+                step: $.simpleSlider.stepMethodBackgroundPosition,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    self.complete();
+                }
+            });
+            $('div:[id="simpleSlider-square-2-2"]', current).animate({
+                'height': 0,
+                'width': 0,
+                'margin-top': marginH / 2,
+                'margin-left': marginW / 2,
+                'backgroundPosition': '-' + marginW + 'px -' + marginH + 'px'
+            }, {
+                duration: options.speed,
+                step: $.simpleSlider.stepMethodBackgroundPosition,
+                complete: function () {
+                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                }
+            });
         } 
     );
     
@@ -511,11 +578,7 @@
                 'backgroundPosition': '-' + margin + 'px 0px'
             }, {
                 duration: options.speed,
-                step: function (now, fx) {
-                    if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
-                        $.simpleSlider.animateBackgroundPosition(fx);
-                    }
-                },
+                step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
@@ -556,11 +619,7 @@
                 'backgroundPosition': '0px -' + margin + 'px'
             }, {
                 duration: options.speed,
-                step: function (now, fx) {
-                    if (fx.prop == 'backgroundPosition' || fx.prop == 'background-position') {
-                        $.simpleSlider.animateBackgroundPosition(fx);
-                    }
-                },
+                step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
                     $('div:[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
