@@ -76,8 +76,8 @@
         var spw      = options.squaresPerWidth;
         var sph      = options.squaresPerHeight;
         var callback = function () {
-            if ($('div:[id*="simpleSlider-square-"]:animated', next).length === 1) {
-                $('div:[id*="simpleSlider-square-"]', next).remove();
+            if ($('div[id*="simpleSlider-square-"]:animated', next).length === 1) {
+                $('div[id*="simpleSlider-square-"]', next).remove();
                 $('img:first', current).hide();
                 $('img:first', next).show();
                 self.complete();
@@ -95,7 +95,7 @@
         var speedModifier = spw > sph ? spw / 2 : sph / 2;
         var delayModifier = speedModifier * 4;
         var dimension = $.simpleSlider.buildSquareMatrix(next, options);
-        $('div:[id*="simpleSlider-square"]', next).css(init).each(function (index) {
+        $('div[id*="simpleSlider-square"]', next).css(init).each(function (index) {
             var square = $(this);
             var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
             var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
@@ -215,13 +215,13 @@
             margin += opts.direction === '+' ? dimension[0] : 0;
             
             $('img:first', current).hide();
-            $('div:[id*="simpleSlider-square"]', current).show().animate({
+            $('div[id*="simpleSlider-square"]', current).show().animate({
                 'width': 0,
                 'margin-left': margin
             }, {
                 duration: options.speed,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             });
@@ -246,13 +246,13 @@
             margin += opts.direction === '+' ? dimension[1] : 0;
             
             $('img:first', current).hide();
-            $('div:[id*="simpleSlider-square"]', current).show().animate({
+            $('div[id*="simpleSlider-square"]', current).show().animate({
                 'height': 0,
                 'margin-top': margin
             }, {
                 duration: options.speed,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             });
@@ -267,8 +267,8 @@
             var spw      = options.squaresPerWidth;
             var sph      = options.squaresPerHeight;
             var callback = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                if ($('div[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             }
@@ -285,7 +285,7 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             $('img:first', current).hide();
             
-            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+            $('div[id*="simpleSlider-square"]', current).each(function (index) {
                 var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
@@ -309,8 +309,8 @@
             var spw      = options.squaresPerWidth;
             var sph      = options.squaresPerHeight;
             var callback = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                if ($('div[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             }
@@ -330,7 +330,7 @@
             var backgroundPosition = '0 0';
             $('img:first', current).hide();
             
-            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+            $('div[id*="simpleSlider-square"]', current).each(function (index) {
                 var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
@@ -368,8 +368,8 @@
             var spw      = options.squaresPerWidth;
             var sph      = options.squaresPerHeight;
             var callback = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                if ($('div[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             }
@@ -386,7 +386,7 @@
             $('img:first', current).hide();
             
             var lastWait = 0;
-            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+            $('div[id*="simpleSlider-square"]', current).each(function (index) {
                 square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
@@ -409,8 +409,8 @@
             var spw      = options.squaresPerWidth;
             var sph      = options.squaresPerHeight;
             var callback = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                if ($('div[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             }
@@ -430,7 +430,7 @@
             var backgroundPosition = '0 0';
             $('img:first', current).hide();
             
-            $('div:[id*="simpleSlider-square"]', current).each(function (index) {
+            $('div[id*="simpleSlider-square"]', current).each(function (index) {
                 var square = $(this);
                 var row = parseInt(this.id.substr(this.id.indexOf('-', 19)+1));
                 var col = parseInt(this.id.substr(this.id.lastIndexOf('-')+1));
@@ -495,17 +495,17 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             
             $('img:first', current).hide();
-            $('div:[id*="simpleSlider-square"]', current).show();
-            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+            $('div[id*="simpleSlider-square"]', current).show();
+            $('div[id="simpleSlider-square-1-1"]', current).animate({
                 'height': 0,
                 'width': 0
             }, {
                 duration: options.speed,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                 }
             });
-            $('div:[id="simpleSlider-square-1-2"]', current).animate({
+            $('div[id="simpleSlider-square-1-2"]', current).animate({
                 'height': 0,
                 'width': 0,
                 'margin-left': marginW / 2,
@@ -514,10 +514,10 @@
                 duration: options.speed,
                 step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                 }
             });
-            $('div:[id="simpleSlider-square-2-1"]', current).animate({
+            $('div[id="simpleSlider-square-2-1"]', current).animate({
                 'height': 0,
                 'width': 0,
                 'margin-top': marginH / 2,
@@ -526,11 +526,11 @@
                 duration: options.speed,
                 step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             });
-            $('div:[id="simpleSlider-square-2-2"]', current).animate({
+            $('div[id="simpleSlider-square-2-2"]', current).animate({
                 'height': 0,
                 'width': 0,
                 'margin-top': marginH / 2,
@@ -540,7 +540,7 @@
                 duration: options.speed,
                 step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                 }
             });
         } 
@@ -563,16 +563,16 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             
             $('img:first', current).hide();
-            $('div:[id*="simpleSlider-square"]', current).show();
-            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+            $('div[id*="simpleSlider-square"]', current).show();
+            $('div[id="simpleSlider-square-1-1"]', current).animate({
                 'width': 0
             }, {
                 duration: options.speed,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                 }
             });
-            $('div:[id="simpleSlider-square-1-2"]', current).animate({
+            $('div[id="simpleSlider-square-1-2"]', current).animate({
                 'width': 0,
                 'margin-left': margin / 2,
                 'backgroundPosition': '-' + margin + 'px 0px'
@@ -580,7 +580,7 @@
                 duration: options.speed,
                 step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             });
@@ -604,16 +604,16 @@
             var dimension = $.simpleSlider.buildSquareMatrix(current, options);
             
             $('img:first', current).hide();
-            $('div:[id*="simpleSlider-square"]', current).show();
-            $('div:[id="simpleSlider-square-1-1"]', current).animate({
+            $('div[id*="simpleSlider-square"]', current).show();
+            $('div[id="simpleSlider-square-1-1"]', current).animate({
                 'height': 0
             }, {
                 duration: options.speed,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                 }
             });
-            $('div:[id="simpleSlider-square-2-1"]', current).animate({
+            $('div[id="simpleSlider-square-2-1"]', current).animate({
                 'height': 0,
                 'margin-top': margin / 2,
                 'backgroundPosition': '0px -' + margin + 'px'
@@ -621,7 +621,7 @@
                 duration: options.speed,
                 step: $.simpleSlider.stepMethodBackgroundPosition,
                 complete: function () {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             });
@@ -636,8 +636,8 @@
             var spw      = options.squaresPerWidth;
             var sph      = options.squaresPerHeight;
             var callback = function () {
-                if ($('div:[id*="simpleSlider-square-"]:visible', current).length === 0) {
-                    $('div:[id*="simpleSlider-square-"]', current).remove();
+                if ($('div[id*="simpleSlider-square-"]:visible', current).length === 0) {
+                    $('div[id*="simpleSlider-square-"]', current).remove();
                     self.complete();
                 }
             }
@@ -664,7 +664,7 @@
                 var count = (dir == 0 || dir == 2) ? spw : sph;
             
                 for (var i = 1; i <= count; i++) {
-                    var square = $('div:[id="simpleSlider-square-' + row + '-' + col + '"]', current);
+                    var square = $('div[id="simpleSlider-square-' + row + '-' + col + '"]', current);
                     
                     if (i == count) {
                         dir = ++dir % 4;
