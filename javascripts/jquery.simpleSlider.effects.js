@@ -1,10 +1,10 @@
 /**
  * effects for simpleSlider
  *
- * @version: 1.4.19 - (2012/04/10)
+ * @version: 1.5.19 - (2013/04/25)
  * @author Henning Huncke
  *
- * Copyright (c) 2011-2012 Henning Huncke (http://www.devjunkie.de)
+ * Copyright (c) 2011-2013 Henning Huncke (http://www.devjunkie.de)
  * Licensed under the GPL (LICENSE) licens.
  */
 

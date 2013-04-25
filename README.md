@@ -1,5 +1,5 @@
 # simpleSlider - A jQuery-Plugin to create easy and simple image sliders
-Version: 1.4.19
+Version: 1.5.19
 
 ## Requirements
 The simpleSlider needs minimum jQuery 1.4 to run without problems.
@@ -33,18 +33,18 @@ The simpleSlider needs minimum jQuery 1.4 to run without problems.
     <script type="text/javascript" src="javascripts/jquery.simpleSlider.effects.js" />  # if you want more effects
 
     <script type="text/javascript">
-        $(document).ready(function () {	
+        $(document).ready(function () {
             $('#slider').simpleSlider({
                 width: 640,
                 height: 360
             });
-        });	
+        });
     </script>
-    
+
     ...
-    
+
     <div id="slider">
-        <ul>				
+        <ul>
             <li>
                 <img src="images/example/image_01.jpg" alt="Image 01" />
                 <div>
