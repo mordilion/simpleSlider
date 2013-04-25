@@ -43,7 +43,8 @@
             useImageTitle: false,       // use the value of image-title attribute to display title
 
             hoverPause: true,           // pause slide on hover
-            navigation: true,           // show previous, next and buttons
+            navigation: true,           // show the previous and next buttons
+            bullets: true,              // show the bullet navigation
             numeric: false,             // show the buttons as numeric
             nextText: 'next',           // text showing on the next button
             title: true,                // show the image title
@@ -252,20 +253,9 @@
 
 
         /**
-         * initialization the navigation elements
+         * initialization the navigation
          */
         function initNavigation() {
-            // setup navigation buttons
-            $(wrapper).append('<ol class="simpleSlider-navigation-buttons" id="simpleSlider-' + element.id + '-navigation-buttons" />');
-            var buttons = getNavigationButtons();
-
-            $(buttons).css({'z-index': options.zIndex + 120});
-            for (var i = 1; i <= count; i++) {
-                var li = $(buttons).append('<li />').find('li:last');
-                var link = options.numeric ? i : '';
-                $(li).append('<a class="simpleSlider-navigation-button" id="simpleSlider-' + element.id + '-navigation-button-' + i + '" href="javascript:void(0);" rel="' + (i - 1) + '">' + link + '</a>');
-            }
-
             // setup navigation (prev, next)
             $(element).append('<div class="simpleSlider-navigation" id="simpleSlider-' + element.id + '-navigation" style="position: absolute" />');
             var navigation = getNavigation();
@@ -274,17 +264,12 @@
                 .append('<a class="simpleSlider-navigation-previous" id="simpleSlider-' + element.id + '-navigation-previous" href="javascript:void(0);" rel="prev">' + options.previousText + '</a>')
                 .append('<a class="simpleSlider-navigation-next" id="simpleSlider-' + element.id + '-navigation-next" href="javascript:void(0);" rel="next">' + options.nextText + '</a>');
 
-            $('a[class*="simpleSlider-navigation"]', $(wrapper)).click(function () {
+            $('a[class*="simpleSlider-navigation"]', navigation).click(function () {
                 clearTimeout(timeout);
                 slide($(this).attr('rel'), true);
             });
 
             $(getNavigation(true) + ', ' + getTitle(true)).mouseover(function () {
-                if (options.hoverPause) {
-                    clearTimeout(timeout);
-                    pause = true;
-                }
-
                 $(getButtonPrevious(true) + ', ' + getButtonNext(true)).show();
             }).mouseout(function () {
                 pause = false;
@@ -293,6 +278,29 @@
             });
 
             $(getButtonPrevious(true) + ', ' + getButtonNext(true)).hide();
+        };
+
+
+        /**
+         * initialization the bullet navigation
+         */
+        function initBullets() {
+            // setup navigation buttons
+            $(wrapper).append('<ol class="simpleSlider-navigation-buttons" id="simpleSlider-' + element.id + '-navigation-buttons" />');
+            var buttons = getNavigationButtons();
+
+            $(buttons).css({'z-index': options.zIndex + 120});
+
+            for (var i = 1; i <= count; i++) {
+                var li = $(buttons).append('<li />').find('li:last');
+                var link = options.numeric ? i : '';
+                $(li).append('<a class="simpleSlider-navigation-button" id="simpleSlider-' + element.id + '-navigation-button-' + i + '" href="javascript:void(0);" rel="' + (i - 1) + '">' + link + '</a>');
+            }
+
+            $('a[class="simpleSlider-navigation-button"]', buttons).click(function () {
+                clearTimeout(timeout);
+                slide($(this).attr('rel'), true);
+            });
         };
 
 
@@ -612,8 +620,23 @@
         options.index = index;
 
         init();
+
         if (options.navigation) {
             initNavigation();
+        }
+
+        if (options.bullets) {
+            initBullets();
+        }
+
+        if (options.hoverPause) {
+            $(element).mouseover(function () {
+                clearTimeout(timeout);
+                pause = true;
+            }).mouseout(function () {
+                pause = false;
+                resetTimeout();
+            });
         }
 
         resetNavigation();

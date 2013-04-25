@@ -2,24 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>simpleSlider jQuery Plugin</title>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />    
-	
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 	<!-- IMPORTANT : must before the javascripts -->
     <link href="stylesheets/simpleSlider.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/example.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="themes/simpleSlider.mordilion.css" rel="stylesheet" type="text/css" media="screen" />
     <!-- /IMPORTANT : must before the javascripts -->
-	
+
 	<script type="text/javascript" src="javascripts/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.simpleSlider.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.simpleSlider.effects.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function () {	
+		$(document).ready(function () {
 			$('#slider').simpleSlider({
 			    width: 640,
-			    height: 360
+			    height: 360,
+                navigation: true
 			});
-		});	
+		});
 	</script>
 </head>
 <body>
@@ -27,10 +28,10 @@
     <button onClick="$('#slider').simpleSlider().previous(); return false;">Previous</button>
     <button onClick="$('#slider').simpleSlider().next(); return false;">Next</button>
     <button onClick="$('#slider').simpleSlider().restart(); return false;">Restart</button>
-    
+
     <h2>Example</h2>
     <div id="slider" class="theme-mordilion">
-        <ul>				
+        <ul>
 	        <li>
 	            <img src="images/example/borderlands.jpg" alt="Borderlands" />
 	            <div>
@@ -60,7 +61,7 @@
 	                </p>
 	                <a href="http://www.thinkwithportals.com/" target="_blank">website</a>
 	            </div>
-	        </li>	
+	        </li>
 	        <li>
 	            <img src="images/example/teamfortress2.jpg" alt="Team Fortres 2" />
 	            <div>
@@ -70,19 +71,19 @@
 	                </p>
 	                <a href="http://www.teamfortress.com/" target="_blank">website</a>
 	            </div>
-	        </li>	
+	        </li>
         </ul>
     </div>
-		
+
     <h3>Usage</h3>
-	
+
     <pre>
-$(document).ready(function () {	
+$(document).ready(function () {
     $("#slider").simpleSlider({
         width: 640,
         height: 360
     });
-});	
+});
     </pre>
 </body>
 </html>
