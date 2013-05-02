@@ -38,15 +38,19 @@
 .simpleSlider ol.simpleSlider-navigation-buttons li {
     display: inline-block;
     margin: 3px;
+    zoom: 1;
+    *display: inline;
 }
 
 .simpleSlider ol.simpleSlider-navigation-buttons a.simpleSlider-navigation-button {
-    display: block;
+    display: inline-block;
     border-radius: 4px;
     background: transparent;
     padding: 4px;
     color: #FFF;
     border: 1px solid #ACACAC;
+    zoom: 1;
+    *display: inline;
 }
 
 .simpleSlider ol.simpleSlider-navigation-buttons a.simpleSlider-navigation-button.current {
@@ -63,7 +67,7 @@
     display: block;
     background: #000;
     opacity: 0.7;
-    padding: 0 10px; 
+    padding: 0 10px;
     position: absolute;
     font-size: 12px;
     line-height: 30px;
